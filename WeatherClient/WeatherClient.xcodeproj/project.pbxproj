@@ -22,6 +22,8 @@
 		6CDC014C2C08CEE3006B2B5E /* CDWeatherInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDC01482C08CEE3006B2B5E /* CDWeatherInfo+CoreDataProperties.swift */; };
 		6CDC014D2C08CEE3006B2B5E /* CDWeatherDetailes+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDC01492C08CEE3006B2B5E /* CDWeatherDetailes+CoreDataClass.swift */; };
 		6CDC014E2C08CEE3006B2B5E /* CDWeatherDetailes+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDC014A2C08CEE3006B2B5E /* CDWeatherDetailes+CoreDataProperties.swift */; };
+		6CDC017F2C09DDFA006B2B5E /* CoreDataService+Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDC017E2C09DDFA006B2B5E /* CoreDataService+Weather.swift */; };
+		6CDC01832C0A011B006B2B5E /* MainViewController+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDC01822C0A011B006B2B5E /* MainViewController+CoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		6CDC01482C08CEE3006B2B5E /* CDWeatherInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDWeatherInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6CDC01492C08CEE3006B2B5E /* CDWeatherDetailes+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDWeatherDetailes+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6CDC014A2C08CEE3006B2B5E /* CDWeatherDetailes+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDWeatherDetailes+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6CDC017E2C09DDFA006B2B5E /* CoreDataService+Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataService+Weather.swift"; sourceTree = "<group>"; };
+		6CDC01822C0A011B006B2B5E /* MainViewController+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+CoreData.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				6CAF2A8A2BFB87440084BC52 /* MainViewController.swift */,
+				6CDC01822C0A011B006B2B5E /* MainViewController+CoreData.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				6CDC013D2C08CC02006B2B5E /* CoreDataService.swift */,
+				6CDC017E2C09DDFA006B2B5E /* CoreDataService+Weather.swift */,
 			);
 			path = CoreDataService;
 			sourceTree = "<group>";
@@ -289,12 +295,14 @@
 				6CDC012B2C08B8B2006B2B5E /* URLSessionExtensions.swift in Sources */,
 				6CAF2A8B2BFB87440084BC52 /* MainViewController.swift in Sources */,
 				6CDC01302C08B8E5006B2B5E /* Urls.swift in Sources */,
+				6CDC01832C0A011B006B2B5E /* MainViewController+CoreData.swift in Sources */,
 				6CAF2A872BFB87440084BC52 /* AppDelegate.swift in Sources */,
 				6CDC014B2C08CEE3006B2B5E /* CDWeatherInfo+CoreDataClass.swift in Sources */,
 				6CDC014C2C08CEE3006B2B5E /* CDWeatherInfo+CoreDataProperties.swift in Sources */,
 				6CDC014D2C08CEE3006B2B5E /* CDWeatherDetailes+CoreDataClass.swift in Sources */,
 				6CDC014E2C08CEE3006B2B5E /* CDWeatherDetailes+CoreDataProperties.swift in Sources */,
 				6CDC01372C08BCEB006B2B5E /* Network.swift in Sources */,
+				6CDC017F2C09DDFA006B2B5E /* CoreDataService+Weather.swift in Sources */,
 				6CDC013E2C08CC02006B2B5E /* CoreDataService.swift in Sources */,
 				6CAF2A892BFB87440084BC52 /* SceneDelegate.swift in Sources */,
 			);
