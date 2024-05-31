@@ -11,9 +11,15 @@ class Network {
     
     static let shared = Network()
     
-    func fetchWeather() {
+    func fetchWeather() -> [DMWeatherInfo]? {
         
-        guard let url = Urls.weatherAPIUrl else { return }
+        var weatherAPI = [DMWeatherInfo]()
+        
+        guard let url = Urls.weatherAPIUrl
+        else {
+            assertionFailure()
+            return nil
+        }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -23,13 +29,15 @@ class Network {
             expecting: DMWeatherInfo.self
         ) { result in
             switch result {
-            case .success(let colors):
+            case .success(let weather):
+                weatherAPI.append(weather)
                 DispatchQueue.main.async {
-                    print(colors)
+                    print(weather)
                 }
             case .failure(let error):
                 print(error)
             }
         }
+        return weatherAPI
     }
 }
