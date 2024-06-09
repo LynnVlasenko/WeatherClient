@@ -7,8 +7,15 @@
 
 import CoreData
 
-// MARK: - Weather CoreData
-extension CoreDataService {
+// protocol for Controller interaction with CoreData
+protocol CoreDataWeather {
+   
+    func insertWeatherInfo(with info: DMWeatherInfo)
+    func fetchAllWeatherInfo() -> [CDWeatherInfo]
+}
+
+// MARK: - CoreDataWeather
+extension CoreDataService: CoreDataWeather {
     
     // insert data from API to CoreData
     func insertWeatherInfo(with info: DMWeatherInfo) {
@@ -37,6 +44,17 @@ extension CoreDataService {
         save(context: context)
     }
     
+    func fetchAllWeatherInfo() -> [CDWeatherInfo] {
+        let fetchRequest = CDWeatherInfo.fetchRequest()
+        let fetchedResult = fetchDataFromEntity(CDWeatherInfo.self, fetchRequest: fetchRequest)
+        
+        return fetchedResult
+    }
+}
+
+// MARK: - WeatherDetailes
+private extension CoreDataService {
+    
     // insert data from API (DMWeatherInfo.Weather) to CoreData (CDWeatherDetailes) and then create a relation in insertWeatherInfo (with info: DMWeatherInfo)
     func insertWeatherDetailes(with detailes: DMWeatherInfo.Weather) -> CDWeatherDetailes? {
         
@@ -53,12 +71,5 @@ extension CoreDataService {
         weatherDetailesEntity.icon = detailes.icon
         
         return weatherDetailesEntity
-    }
-    
-    func fetchAllWeatherInfo() -> [CDWeatherInfo] {
-        let fetchRequest = CDWeatherInfo.fetchRequest()
-        let fetchedResult = fetchDataFromEntity(CDWeatherInfo.self, fetchRequest: fetchRequest)
-        
-        return fetchedResult
     }
 }
