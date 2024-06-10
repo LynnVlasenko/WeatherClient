@@ -19,7 +19,7 @@ extension NetworkService: NetworkServiceWeather {
     
     func loadWeather(for location: Location, completion: @escaping (DMWeatherInfo?, Error?) -> ()) {
         
-        let urlString = "\(APIConstant.weatherUrl())?lat=\(location.latitude)&lon=\(location.longitude)&appid=\(APIConstant.appId)"
+        let urlString = "\(APIConstant.weatherUrl())?lat=\(location.latitude)&lon=\(location.longitude)\(APIConstant.celciusMetric)&appid=\(APIConstant.appId)"
         
         guard let url = URL(string: urlString)
         else {

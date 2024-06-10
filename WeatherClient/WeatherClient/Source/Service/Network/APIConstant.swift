@@ -13,6 +13,7 @@ struct APIConstant {
     static let dataPath = "/data"
     static let apiVersion = "2.5"
     static let weatherPath = "/weather"
+    static let celciusMetric = "&units=metric"
     
     static let appId = "ccf629fe4cd5a83b229a01d635a970db"
     
