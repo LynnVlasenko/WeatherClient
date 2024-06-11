@@ -18,10 +18,10 @@ class MainViewController: UIViewController {
     override func loadView() {
         // configuration and initialization of the view
         let mainView = MainView(frame: .zero)
-        //mainView.backgroundColor = .systemBlue
         mainView.delegate = self
         contentView = mainView
         view = mainView
+        // get current location
         setupLocation()
     }
     
@@ -29,16 +29,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         // initialize the initial state
         setupInitialState()
-        // get current location
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        model.loadLastData()
-    }
-    
-    override func loadViewIfNeeded() {
-        super.loadViewIfNeeded()
+        // load Data
         model.loadLastData()
     }
     
@@ -69,7 +60,7 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func setupLocation() {
         manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
         switch manager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
@@ -78,7 +69,7 @@ extension MainViewController: CLLocationManagerDelegate {
             manager.requestWhenInUseAuthorization()
             manager.startUpdatingLocation()
         case .denied, .restricted:
-            print("denied") // Зробити тут не прінт, а алерт з виходом на зміну налаштувань, щоб дати доступ до локації. Тобто буде 2 кнопки Open Settings та Cansel
+            print("denied") // Make here not a print, but an alert with a button to change the settings to give access to the location. That is, there will be 2 buttons Open Settings and Cancel
         @unknown default:
             break
         }
@@ -90,6 +81,7 @@ extension MainViewController: CLLocationManagerDelegate {
         }
         let location = Location(latitude: first.coordinate.latitude, longitude: first.coordinate.longitude)
         
+        // Load new data if the location was updated
         DispatchQueue.main.async {
             self.model.loadData(with: location)
         }
