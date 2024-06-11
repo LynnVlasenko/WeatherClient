@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     var model: MainModelProtocol!
     var contentView: MainViewProtocol!
     
-    var manager: CLLocationManager?
+    var manager = CLLocationManager()
     
     override func loadView() {
         // configuration and initialization of the view
@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
         mainView.delegate = self
         contentView = mainView
         view = mainView
+        setupLocation()
     }
     
     override func viewDidLoad() {
@@ -29,6 +30,15 @@ class MainViewController: UIViewController {
         // initialize the initial state
         setupInitialState()
         // get current location
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        model.loadLastData()
+    }
+    
+    override func loadViewIfNeeded() {
+        super.loadViewIfNeeded()
         model.loadLastData()
     }
     
@@ -58,11 +68,20 @@ extension MainViewController: MainModelDelegate {
 extension MainViewController: CLLocationManagerDelegate {
     
     func setupLocation() {
-        manager = CLLocationManager()
-        manager?.delegate = self
-        manager?.desiredAccuracy = kCLLocationAccuracyBest
-        manager?.requestWhenInUseAuthorization()
-        manager?.startUpdatingLocation()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            manager.startUpdatingLocation()
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+            manager.startUpdatingLocation()
+        case .denied, .restricted:
+            print("denied") // Зробити тут не прінт, а алерт з виходом на зміну налаштувань, щоб дати доступ до локації. Тобто буде 2 кнопки Open Settings та Cansel
+        @unknown default:
+            break
+        }
     }
     
     internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -70,7 +89,11 @@ extension MainViewController: CLLocationManagerDelegate {
             return
         }
         let location = Location(latitude: first.coordinate.latitude, longitude: first.coordinate.longitude)
-        model.loadData(with: location)
+        
+        DispatchQueue.main.async {
+            self.model.loadData(with: location)
+        }
+        
         print("lat: \(first.coordinate.latitude), lon: \(first.coordinate.longitude)")
     }
 }
