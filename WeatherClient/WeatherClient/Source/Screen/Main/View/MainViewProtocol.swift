@@ -10,5 +10,5 @@ import Foundation
 protocol MainViewProtocol {
     
     // function that will update the data on the screen
-    func setupWeather(text: String)
+    func setupWeather(model: CDWeatherInfo)
 }

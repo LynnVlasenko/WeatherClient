@@ -10,5 +10,6 @@ import Foundation
 protocol MainModelProtocol {
     
     // function to receive data and display it on the screen
-    func loadData()
+    func loadData(with location: Location)
+    func loadLastData()
 }

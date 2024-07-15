@@ -25,21 +25,24 @@ class MainModel {
 // MARK: - MainModelProtocol
 extension MainModel: MainModelProtocol {
     
-    // logic to check if data exists in CoreData
-    func loadData() {
-        
+    func loadLastData() {
         // if we have the latest data in CoreData, we show them
         if let storeData = storageService.fetchAllWeatherInfo().last {
             delegate?.dataDidLoad(with: storeData)
         } else {
+            delegate?.setupLocation()
+        }
+    }
+    
+    
+    // logic to check if data exists in CoreData
+    func loadData(with location: Location) {
+        // get current location
             
             DispatchQueue.global(qos: .default).async { [weak self] in
-                
-                // get location (later from map)
-                let location = Location(latitude: 49.989619, longitude: 36.241182)
-                
                 // if there is no data in CoreData
                 // 1 - load the data from the АРI
+                //guard let currentLocation = currentLocation else { return }
                 self?.networkService.loadWeather(for: location) { [weak self] weatherInfo, error in
                     
                     DispatchQueue.main.async {
@@ -61,4 +64,3 @@ extension MainModel: MainModelProtocol {
             }
         }
     }
-}
